@@ -112,23 +112,35 @@
             color: var(--accent);
         }
 
-        /* --- Hero Section --- */
+        /* --- Hero Section (Updated for Image) --- */
         #hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
             padding-top: 70px;
         }
 
-        .hero-content h1 {
+        .hero-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            width: 100%;
+        }
+
+        .hero-text {
+            flex: 1;
+            text-align: left; /* Text aligned left when image is on right */
+        }
+
+        .hero-text h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             line-height: 1.2;
         }
 
-        .hero-content h1 span {
+        .hero-text h1 span {
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -139,10 +151,35 @@
             color: var(--text-secondary);
             margin-bottom: 2rem;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-image-container {
+            flex: 0 0 350px; /* Fixed width for image container */
+            position: relative;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px; /* Slight rounded corners or 50% for circle */
+            border: 4px solid rgba(56, 189, 248, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            object-fit: cover;
+            aspect-ratio: 1 / 1; /* Keeps it square based on the provided portrait */
+            transition: var(--transition);
+        }
+
+        .hero-img:hover {
+            transform: scale(1.02);
+            border-color: var(--accent);
+        }
+
+        /* --- Buttons --- */
         .btn {
             display: inline-block;
             padding: 12px 30px;
@@ -166,7 +203,6 @@
         .btn-outline {
             border: 1px solid var(--accent);
             color: var(--accent);
-            margin-left: 10px;
             background: transparent;
         }
 
@@ -397,8 +433,28 @@
         }
 
         /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .hero-wrapper {
+                flex-direction: column-reverse; /* Image on top on mobile */
+                text-align: center;
+                gap: 40px;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image-container {
+                flex: 0 0 250px;
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero-content h1 {
+            .hero-text h1 {
                 font-size: 2.5rem;
             }
             
@@ -407,7 +463,7 @@
             }
 
             .nav-links {
-                display: none; /* Simple hiding for mobile for this static version, normally a burger menu is needed */
+                display: none; 
             }
             
             .contact-item {
@@ -433,14 +489,21 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Updated) -->
     <header id="hero">
-        <div class="container hero-content">
-            <h1>Hi, I'm Abdelrahman Amer<br><span>Full-Stack Software Engineer</span></h1>
-            <p class="hero-subtitle">Building robust backend systems, interactive web interfaces, and solving complex problems with clean code.</p>
-            <div>
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-outline">Contact Me</a>
+        <div class="container hero-wrapper">
+            <div class="hero-text">
+                <h1>Hi, I'm Abdelrahman Amer<br><span>Software Engineer</span></h1>
+                <p class="hero-subtitle">Building robust backend systems, interactive web interfaces, and solving complex problems with clean code.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+                </div>
+            </div>
+            
+            <div class="hero-image-container">
+                <!-- تأكد من إن اسم الصورة في الفولدر هو profile.png -->
+                <img src="profile.png" alt="Abdelrahman Amer" class="hero-img">
             </div>
         </div>
     </header>
@@ -629,7 +692,6 @@
                 <a href="tel:+201006503372" class="contact-item">
                     <span>+20 100 650 3372</span>
                 </a>
-                <!-- Email placeholder -->
                 <a href="mailto:contact@abdelrahman.dev" class="contact-item">
                     <span>contact@abdelrahman.dev</span>
                 </a>
