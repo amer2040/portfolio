@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdelrahman Amer | Software Engineer</title>
     <meta name="description" content="Portfolio of Abdelrahman Amer, a Software Engineer specializing in Full-stack development and System-level programming.">
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="Abdelrahman Amer | Software Engineer">
+    <meta property="og:description" content="Building robust backend systems, interactive web interfaces, and solving complex problems with clean code.">
+    <meta property="og:image" content="profile.png">
+    <meta property="og:url" content="https://amer2040.github.io/">
+    
     <style>
         /* --- CSS Variables & Reset --- */
         :root {
@@ -115,6 +121,8 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-primary);
+            z-index: 1002;
+            position: relative; /* Ensure logo is clickable */
         }
 
         .logo span {
@@ -125,6 +133,7 @@
             display: flex;
             gap: 30px;
             align-items: center;
+            z-index: 1001; /* Ensure menu is high enough */
         }
 
         .nav-links a {
@@ -153,6 +162,25 @@
         .lang-btn:hover {
             background: var(--accent);
             color: #fff;
+        }
+
+        /* --- Mobile Menu (Hamburger) --- */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1003; /* Highest z-index for the button */
+            background: none;
+            border: none;
+            padding: 5px; /* Add padding for touch area */
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            transition: all 0.3s ease-in-out;
+            background-color: var(--text-primary);
         }
 
         /* --- Hero Section --- */
@@ -513,15 +541,74 @@
         }
 
         /* --- Responsive Design --- */
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                gap: 0;
+                flex-direction: column;
+                background-color: var(--bg-color);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 20px 0;
+                height: calc(100vh - 70px); /* Fill remaining screen */
+                overflow-y: auto; /* Allow scroll if menu is long */
+            }
+            
+            /* RTL Mobile Menu Positioning */
+            html[dir="rtl"] .nav-links {
+                left: auto;
+                right: -100%;
+            }
+
+            .nav-item {
+                margin: 16px 0;
+            }
+
+            /* Make links full width for easier clicking */
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 10px;
+            }
+
+            .nav-links.active {
+                left: 0;
+                z-index: 1001; /* Ensure active menu is on top */
+            }
+            
+            html[dir="rtl"] .nav-links.active {
+                right: 0;
+                left: auto;
+            }
+            
             .hero-wrapper {
                 flex-direction: column-reverse;
                 text-align: center;
                 gap: 40px;
             }
-            
+
             html[dir="rtl"] .hero-wrapper {
-                flex-direction: column-reverse; /* Keep text under image on mobile */
+                flex-direction: column-reverse; 
             }
 
             .hero-text {
@@ -532,26 +619,12 @@
                 text-align: center !important;
             }
 
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .hero-image-container {
-                flex: 0 0 280px;
-            }
-        }
-
-        @media (max-width: 768px) {
             .hero-text h1 {
                 font-size: 2.5rem;
             }
             
             .about-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                display: none; 
             }
             
             .contact-item {
@@ -568,13 +641,19 @@
         <div class="container nav-content">
             <a href="#" class="logo" data-i18n="name">Abdelrahman<span>.Dev</span></a>
             <ul class="nav-links">
-                <li><a href="#about" data-i18n="nav_about">About</a></li>
-                <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
-                <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
-                <li><a href="#learning" data-i18n="nav_learning">Learning</a></li>
-                <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
-                <li><button class="lang-btn" onclick="toggleLanguage()" id="langBtn">عربي</button></li>
+                <li class="nav-item"><a href="#about" onclick="toggleMenu()" data-i18n="nav_about">About</a></li>
+                <li class="nav-item"><a href="#skills" onclick="toggleMenu()" data-i18n="nav_skills">Skills</a></li>
+                <li class="nav-item"><a href="#projects" onclick="toggleMenu()" data-i18n="nav_projects">Projects</a></li>
+                <li class="nav-item"><a href="#learning" onclick="toggleMenu()" data-i18n="nav_learning">Learning</a></li>
+                <li class="nav-item"><a href="#contact" onclick="toggleMenu()" data-i18n="nav_contact">Contact</a></li>
+                <li class="nav-item"><button class="lang-btn" onclick="toggleLanguage()" id="langBtn">عربي</button></li>
             </ul>
+            <!-- Mobile Hamburger Icon -->
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </nav>
 
@@ -746,7 +825,7 @@
                             <span class="stack-item">Redis</span>
                             <span class="stack-item">Queue Systems</span>
                         </div>
-                        <a href="https://github.com/yourusername/fullstack_js" target="_blank" class="project-link">
+                        <a href="https://github.com/amer2040/" target="_blank" class="project-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             <span data-i18n="view_github">View on GitHub</span>
                         </a>
@@ -795,8 +874,8 @@
                 <a href="tel:+201006503372" class="contact-item">
                     <span>+20 100 650 3372</span>
                 </a>
-                <a href="mailto:contact@aboodamer7@gmail.com" class="contact-item">
-                    <span>contact@aboodamer7@gmail.com</span>
+                <a href="mailto:aboodamer7@gmail.com" class="contact-item">
+                    <span>aboodamer7@gmail.com</span>
                 </a>
             </div>
 
@@ -813,7 +892,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Language Toggle -->
+    <!-- JavaScript for Language Toggle & Mobile Menu -->
     <script>
         const translations = {
             en: {
@@ -856,7 +935,7 @@
                 view_github: 'View on GitHub',
                 current_focus: 'Current Focus',
                 learning_title: 'Diving into AI & Machine Learning',
-                learning_desc: 'Currently expanding my technical horizon by diving deep into <strong>Machine Learning</strong> and <strong>AI Agents</strong>. I am actively studying the architecture of intelligent agents and leveraging my backend expertise to build scalable, data-driven AI solutions.'
+                learning_desc: 'Currently expanding my technical horizon by diving deep into <strong>Machine Learning</strong> and <strong>AI Agents</strong>. I am actively studying architecture of intelligent agents and leveraging my backend expertise to build scalable, data-driven AI solutions.'
             },
             ar: {
                 name: 'عبد الرحمن<span>.عامر</span>',
@@ -904,19 +983,15 @@
 
         let currentLang = 'en';
 
+        // Toggle Language
         function toggleLanguage() {
-            // Toggle language
             currentLang = currentLang === 'en' ? 'ar' : 'en';
-            
-            // Update HTML attributes
             document.documentElement.lang = currentLang;
             document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 
-            // Update button text
             const btn = document.getElementById('langBtn');
             btn.innerText = currentLang === 'ar' ? 'English' : 'عربي';
 
-            // Update all translatable elements
             const elements = document.querySelectorAll('[data-i18n]');
             elements.forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -924,6 +999,15 @@
                     el.innerHTML = translations[currentLang][key];
                 }
             });
+        }
+
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
         }
     </script>
 </body>
