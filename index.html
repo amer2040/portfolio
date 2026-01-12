@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdelrahman Amer | Software Engineer</title>
     <meta name="description" content="Portfolio of Abdelrahman Amer, a Software Engineer specializing in Full-stack development and System-level programming.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://img.icons8.com/color/48/code.png" type="image/png">
+    
     <!-- Open Graph for Social Sharing -->
     <meta property="og:title" content="Abdelrahman Amer | Software Engineer">
     <meta property="og:description" content="Building robust backend systems, interactive web interfaces, and solving complex problems with clean code.">
     <meta property="og:image" content="profile.png">
     <meta property="og:url" content="https://amer2040.github.io/">
+    
+    <!-- AOS Animation Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         /* --- CSS Variables & Reset --- */
@@ -122,7 +129,7 @@
             font-weight: 700;
             color: var(--text-primary);
             z-index: 1002;
-            position: relative; /* Ensure logo is clickable */
+            position: relative;
         }
 
         .logo span {
@@ -133,7 +140,7 @@
             display: flex;
             gap: 30px;
             align-items: center;
-            z-index: 1001; /* Ensure menu is high enough */
+            z-index: 1001;
         }
 
         .nav-links a {
@@ -168,10 +175,10 @@
         .hamburger {
             display: none;
             cursor: pointer;
-            z-index: 1003; /* Highest z-index for the button */
+            z-index: 1003;
             background: none;
             border: none;
-            padding: 5px; /* Add padding for touch area */
+            padding: 5px;
         }
 
         .bar {
@@ -231,6 +238,7 @@
         .hero-buttons {
             display: flex;
             gap: 15px;
+            flex-wrap: wrap;
         }
 
         .hero-image-container {
@@ -258,7 +266,9 @@
 
         /* --- Buttons --- */
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             padding: 12px 30px;
             border-radius: 5px;
             font-weight: 600;
@@ -315,6 +325,7 @@
 
         .education-card:hover {
             transform: translateX(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
         html[dir="rtl"] .education-card:hover {
@@ -332,7 +343,30 @@
             display: block;
         }
 
+        /* --- GitHub Stats Section --- */
+        #github-stats {
+            background-color: var(--bg-color);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .github-stats-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .github-stats-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.1));
+        }
+
         /* --- Skills Section --- */
+        #skills {
+            background-color: var(--bg-secondary);
+        }
+
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -340,10 +374,16 @@
         }
 
         .skill-category {
-            background: var(--bg-secondary);
+            background: var(--bg-color);
             padding: 30px;
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
         }
 
         .skill-category h3 {
@@ -570,11 +610,10 @@
                 transition: 0.3s;
                 border-bottom: 1px solid rgba(255,255,255,0.1);
                 padding: 20px 0;
-                height: calc(100vh - 70px); /* Fill remaining screen */
-                overflow-y: auto; /* Allow scroll if menu is long */
+                height: calc(100vh - 70px);
+                overflow-y: auto;
             }
             
-            /* RTL Mobile Menu Positioning */
             html[dir="rtl"] .nav-links {
                 left: auto;
                 right: -100%;
@@ -584,7 +623,6 @@
                 margin: 16px 0;
             }
 
-            /* Make links full width for easier clicking */
             .nav-links a {
                 display: block;
                 width: 100%;
@@ -593,7 +631,7 @@
 
             .nav-links.active {
                 left: 0;
-                z-index: 1001; /* Ensure active menu is on top */
+                z-index: 1001;
             }
             
             html[dir="rtl"] .nav-links.active {
@@ -660,16 +698,21 @@
     <!-- Hero Section -->
     <header id="hero">
         <div class="container hero-wrapper">
-            <div class="hero-text">
+            <div class="hero-text" data-aos="fade-right" data-aos-duration="1000">
                 <h1 data-i18n="hero_title">Hi, I'm Abdelrahman Amer<br><span>Software Engineer</span></h1>
                 <p class="hero-subtitle" data-i18n="hero_subtitle">Building robust backend systems, interactive web interfaces, and solving complex problems with clean code.</p>
                 <div class="hero-buttons">
                     <a href="#projects" class="btn btn-primary" data-i18n="btn_work">View My Work</a>
+                    <!-- Download CV Button (Make sure CV.pdf exists in your repo) -->
+                    <a href="CV.pdf" target="_blank" class="btn btn-outline">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        <span data-i18n="btn_cv">Download CV</span>
+                    </a>
                     <a href="#contact" class="btn btn-outline" data-i18n="btn_contact">Contact Me</a>
                 </div>
             </div>
             
-            <div class="hero-image-container">
+            <div class="hero-image-container" data-aos="fade-left" data-aos-duration="1000">
                 <img src="profile.png" alt="Abdelrahman Amer" class="hero-img">
             </div>
         </div>
@@ -680,23 +723,33 @@
         <div class="container">
             <h2 class="section-title"><span data-i18n="section_about">About</span> Me</h2>
             <div class="about-grid">
-                <div class="about-text">
+                <div class="about-text" data-aos="fade-up" data-aos-duration="1000">
                     <p data-i18n="about_p1">I am a highly disciplined Software Engineer with a robust foundation in full-stack development and system-level programming. With a unique university background in Commerce, I bring a blend of business logic and technical rigor to my work.</p>
                     <p data-i18n="about_p2">My journey includes rigorous training at ALX Africa, where I honed my skills in Python, C, and modern web technologies. I have a proven ability in rapid self-learning and problem decomposition, thriving in Agile environments.</p>
                     <p data-i18n="about_p3">Whether it's engineering a Unix shell from scratch in C or deploying scalable REST APIs with Node.js, I am committed to delivering high-quality software solutions.</p>
                 </div>
                 <div class="education-timeline">
-                    <div class="education-card">
+                    <div class="education-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                         <h4 data-i18n="edu_alx_title">ALX Africa Software Engineering Certificate</h4>
                         <span data-i18n="edu_alx_date">Feb 2023 – Jun 2025</span>
                         <p style="font-size: 0.9rem; margin-top: 5px; color: #cbd5e1;" data-i18n="edu_alx_desc">Intensive program focusing on System Engineering, Algorithms, and Full-Stack Development.</p>
                     </div>
-                    <div class="education-card">
+                    <div class="education-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
                         <h4 data-i18n="edu_cu_title">Bachelor of Commerce</h4>
                         <span data-i18n="edu_cu_date">Cairo University | Aug 2018 – Jun 2023</span>
                         <p style="font-size: 0.9rem; margin-top: 5px; color: #cbd5e1;" data-i18n="edu_cu_desc">Faculty of Commerce, providing a strong foundation in business and analytical thinking.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Stats Section -->
+    <section id="github-stats">
+        <div class="container">
+            <div class="github-stats-container" data-aos="zoom-in" data-aos-duration="1000">
+                <!-- Using GitHub Readme Stats API tailored to your theme -->
+                <img src="https://github-readme-stats.vercel.app/api?username=amer2040&show_icons=true&theme=transparent&hide_border=true&bg_color=0f172a&title_color=38bdf8&text_color=f1f5f9&icon_color=38bdf8&include_all_commits=true&count_private=true" alt="GitHub Stats">
             </div>
         </div>
     </section>
@@ -707,7 +760,7 @@
             <h2 class="section-title" data-i18n="section_skills">Technical Competencies</h2>
             <div class="skills-grid">
                 <!-- Backend -->
-                <div class="skill-category">
+                <div class="skill-category" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
                     <h3 data-i18n="skill_backend">Back-End & Systems</h3>
                     <div class="skill-tags">
                         <span class="tag">Python</span>
@@ -720,7 +773,7 @@
                 </div>
 
                 <!-- Frontend -->
-                <div class="skill-category">
+                <div class="skill-category" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
                     <h3 data-i18n="skill_frontend">Front-End & Web</h3>
                     <div class="skill-tags">
                         <span class="tag">JavaScript (ES6+)</span>
@@ -732,7 +785,7 @@
                 </div>
 
                 <!-- Databases -->
-                <div class="skill-category">
+                <div class="skill-category" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
                     <h3 data-i18n="skill_db">Databases & Data</h3>
                     <div class="skill-tags">
                         <span class="tag">MySQL</span>
@@ -744,7 +797,7 @@
                 </div>
 
                 <!-- Tools -->
-                <div class="skill-category">
+                <div class="skill-category" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
                     <h3 data-i18n="skill_tools">DevOps & Methodologies</h3>
                     <div class="skill-tags">
                         <span class="tag">Git/GitHub</span>
@@ -766,7 +819,7 @@
             <div class="projects-grid">
                 
                 <!-- Project 1 -->
-                <div class="project-card">
+                <div class="project-card" data-aos="fade-up" data-aos-duration="1000">
                     <div class="project-content">
                         <h3 class="project-title" data-i18n="proj1_title">AirBnB Clone - Backend</h3>
                         <p class="project-desc" data-i18n="proj1_desc">Engineered a complete full-stack foundation using a custom Python command-line interface. Handles all application classes with full CRUD functionality.</p>
@@ -783,7 +836,7 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div class="project-card">
+                <div class="project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                     <div class="project-content">
                         <h3 class="project-title" data-i18n="proj2_title">Backend API for Crypto Portfolio</h3>
                         <p class="project-desc" data-i18n="proj2_desc">Built a Node.js/Express server with MySQL to manage cryptocurrency investments. Implemented automated average price calculation.</p>
@@ -800,7 +853,7 @@
                 </div>
 
                 <!-- Project 3 -->
-                <div class="project-card">
+                <div class="project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="project-content">
                         <h3 class="project-title" data-i18n="proj3_title">Simple Shell (C)</h3>
                         <p class="project-desc" data-i18n="proj3_desc">Developed a custom UNIX command-line interpreter implementing core shell functionalities using system calls like fork, execve, and wait.</p>
@@ -816,7 +869,7 @@
                 </div>
 
                 <!-- Project 4 -->
-                <div class="project-card">
+                <div class="project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
                     <div class="project-content">
                         <h3 class="project-title" data-i18n="proj4_title">Full-Stack JavaScript System</h3>
                         <p class="project-desc" data-i18n="proj4_desc">Built complex backend systems including REST APIs, Redis caching, and async data processing. Implemented job queues and rate limiting.</p>
@@ -833,7 +886,7 @@
                 </div>
 
                 <!-- Project 5 -->
-                <div class="project-card">
+                <div class="project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                     <div class="project-content">
                         <h3 class="project-title" data-i18n="proj5_title">Flask To-Do Web App</h3>
                         <p class="project-desc" data-i18n="proj5_desc">Developed a full-stack web application using Python/Flask with SQLite. Features RESTful routing and dynamic HTML templating.</p>
@@ -856,12 +909,12 @@
     <!-- Current Focus / AI Section -->
     <section id="learning">
         <div class="container">
-            <div class="learning-content">
+            <div class="learning-content" data-aos="zoom-in" data-aos-duration="1000">
                 <span class="learning-badge" data-i18n="current_focus">Current Focus</span>
                 <h2 data-i18n="learning_title">Diving into AI & Machine Learning</h2>
                 <p data-i18n="learning_desc">
                     Currently expanding my technical horizon by diving deep into <strong>Machine Learning</strong> and <strong>AI Agents</strong>. 
-                    I am actively studying the architecture of intelligent agents and leveraging my backend expertise to build scalable, data-driven AI solutions.
+                    I am actively studying architecture of intelligent agents and leveraging my backend expertise to build scalable, data-driven AI solutions.
                 </p>
             </div>
         </div>
@@ -892,8 +945,14 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Language Toggle & Mobile Menu -->
+    <!-- AOS Animation Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Main JavaScript -->
     <script>
+        // Init AOS
+        AOS.init();
+
         const translations = {
             en: {
                 name: 'Abdelrahman<span>.Dev</span>',
@@ -905,6 +964,7 @@
                 hero_title: 'Hi, I\'m Abdelrahman Amer<br><span>Software Engineer</span>',
                 hero_subtitle: 'Building robust backend systems, interactive web interfaces, and solving complex problems with clean code.',
                 btn_work: 'View My Work',
+                btn_cv: 'Download CV',
                 btn_contact: 'Contact Me',
                 section_about: 'About',
                 about_p1: 'I am a highly disciplined Software Engineer with a robust foundation in full-stack development and system-level programming. With a unique university background in Commerce, I bring a blend of business logic and technical rigor to my work.',
@@ -947,6 +1007,7 @@
                 hero_title: 'مرحباً، أنا عبد الرحمن عامر<br><span>مهندس برمجيات</span>',
                 hero_subtitle: 'بناء أنظمة خلفية قوية، وواجهات ويب تفاعلية، وحل المشكلات المعقدة بكود نظيف وفعال.',
                 btn_work: 'شاهد أعمالي',
+                btn_cv: 'تحميل السيرة الذاتية',
                 btn_contact: 'تواصل معي',
                 section_about: 'نبذة',
                 about_p1: 'مهندس برمجيات منضبط وملتزم جداً، لدي أساس قوي في تطوير الويب الكامل (Full-stack) والبرمجة على مستوى النظام (System-level). بخلفية تجارية من كلية التجارة، أمزج بين التفكير المنطقي والدقة التقنية.',
