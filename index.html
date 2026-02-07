@@ -98,6 +98,15 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
         /* --- Layout Utilities --- */
         .container {
             max-width: 1200px;
@@ -653,7 +662,7 @@
                 width: 100%;
                 text-align: center;
                 transition: 0.3s;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
+                border-bottom: none;
                 padding: 20px 0;
                 height: calc(100vh - 70px);
                 overflow-y: auto;
@@ -911,17 +920,17 @@
                     </div>
                 </div>
 
-                <!-- Project 2: LLM Throughput Lab -->
+                <!-- Project 2: printf -->
                 <div class="project-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                     <div class="project-content">
-                        <h3 class="project-title" data-i18n="proj2_title">LLM Performance Lab</h3>
-                        <p class="project-desc" data-i18n="proj2_desc">Interactive benchmarking harness for llama.cpp. Features comprehensive throughput testing, load balancing simulation, and performance metrics analysis.</p>
+                        <h3 class="project-title" data-i18n="proj2_title">Custom printf (C)</h3>
+                        <p class="project-desc" data-i18n="proj2_desc">Rebuilt the C printf function with format parsing, variadic arguments, and specifier handling as part of systems programming training.</p>
                         <div class="project-stack">
-                            <span class="stack-item">Python</span>
-                            <span class="stack-item">Shell</span>
-                            <span class="stack-item">AI/LLM</span>
+                            <span class="stack-item">C</span>
+                            <span class="stack-item">Variadic</span>
+                            <span class="stack-item">Parsing</span>
                         </div>
-                        <a href="https://github.com/amer2040/llama-throughput-lab" target="_blank" class="project-link">
+                        <a href="https://github.com/amer2040/printf" target="_blank" class="project-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             <span data-i18n="view_github">View on GitHub</span>
                         </a>
@@ -1122,8 +1131,8 @@
                 section_projects: 'Featured Projects',
                 proj1_title: 'Solana Arbitrage Bot',
                 proj1_desc: 'High-frequency arbitrage trading bot built with TypeScript and Jupiter Aggregator v6 Core API. Optimized for low-latency execution on the Solana blockchain.',
-                proj2_title: 'LLM Performance Lab',
-                proj2_desc: 'Interactive benchmarking harness for llama.cpp. Features comprehensive throughput testing, load balancing simulation, and performance metrics analysis.',
+                proj2_title: 'Custom printf (C)',
+                proj2_desc: 'Rebuilt the C printf function with format parsing, variadic arguments, and specifier handling as part of systems programming training.',
                 proj3_title: 'AirBnB Clone - Backend',
                 proj3_desc: 'Engineered a complete full-stack foundation using a custom Python command-line interface. Handles all application classes with full CRUD functionality.',
                 proj4_title: 'Backend API for Crypto Portfolio',
@@ -1165,8 +1174,8 @@
                 section_projects: 'أبرز المشاريع',
                 proj1_title: 'بوت المضاربة (Arbitrage) على Solana',
                 proj1_desc: 'بوت تداول عالي التردد مبني باستخدام TypeScript وواجهة برمجة تطبيقات Jupiter Aggregator Core. مصمم لتحقيق استجابة فائقة السرعة.',
-                proj2_title: 'معمل أداء نماذج اللغة (LLM Lab)',
-                proj2_desc: 'أداة تفاعلية لقياس أداء خوادم llama.cpp. تتضمن اختبارات شاملة للإنتاجية، ومحاكاة توزيع الأحمال، وتحليل مقاييس الأداء.',
+                proj2_title: 'إعادة تنفيذ printf بلغة C',
+                proj2_desc: 'إعادة بناء دالة printf مع تحليل التنسيقات ودعم المتغيرات المتعددة كجزء من تدريب البرمجة على مستوى النظام.',
                 proj3_title: 'نسخة AirBnB - الجزء الخلفي',
                 proj3_desc: 'هندسة أساس متكامل باستخدام واجهة سطر أوامر مخصصة بلغة Python. يدير جميع فئات التطبيق مع وظائف CRUD كاملة.',
                 proj4_title: 'واجهة برمجة تطبيقات لمحفظة العملات المشفرة',
