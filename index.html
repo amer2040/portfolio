@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
@@ -26,21 +26,21 @@
     <style>
         /* --- CSS Variables & Reset --- */
         :root {
-            --bg-color: #0f172a;
-            --bg-secondary: #1e293b;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent: #38bdf8;
-            --accent-hover: #0ea5e9;
-            --gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            --bg-color: #0b0f17;
+            --bg-secondary: #111827;
+            --text-primary: #e6eaf2;
+            --text-secondary: #9aa4b2;
+            --accent: #4fd1c5;
+            --accent-hover: #2dd4bf;
+            --gradient: linear-gradient(135deg, #4fd1c5 0%, #60a5fa 100%);
             --font-main: 'Inter', sans-serif;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --card-bg: rgba(30, 41, 59, 0.4);
-            --card-border: 1px solid rgba(255, 255, 255, 0.05);
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --neon-glow: 0 0 10px rgba(56, 189, 248, 0.5), 0 0 20px rgba(56, 189, 248, 0.3);
+            --card-bg: rgba(17, 24, 39, 0.65);
+            --card-border: 1px solid rgba(255, 255, 255, 0.07);
+            --shadow-sm: 0 8px 16px rgba(4, 8, 16, 0.25);
+            --shadow-md: 0 12px 28px rgba(4, 8, 16, 0.35);
+            --shadow-lg: 0 24px 60px rgba(4, 8, 16, 0.45);
+            --neon-glow: 0 0 12px rgba(79, 209, 197, 0.35), 0 0 24px rgba(96, 165, 250, 0.25);
         }
 
         /* Animated Background */
@@ -51,9 +51,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.05), transparent 60%),
-                        radial-gradient(circle at 10% 10%, rgba(129, 140, 248, 0.05), transparent 40%),
-                        radial-gradient(circle at 90% 90%, rgba(236, 72, 153, 0.05), transparent 40%);
+            background: radial-gradient(circle at 50% 50%, rgba(79, 209, 197, 0.06), transparent 60%),
+                        radial-gradient(circle at 12% 18%, rgba(96, 165, 250, 0.06), transparent 45%),
+                        radial-gradient(circle at 88% 78%, rgba(59, 130, 246, 0.05), transparent 45%);
             z-index: -1;
             pointer-events: none;
             animation: bg-pulse 10s ease-in-out infinite alternate;
@@ -96,6 +96,29 @@
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Layout Utilities --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        section {
+            padding: 96px 0;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 1.25rem + 1.2vw, 2.4rem);
+            margin-bottom: 3.5rem;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title span {
+            color: var(--accent);
         }
 
         /* --- Floating Navbar (Fixed & Wide) --- */
@@ -208,6 +231,7 @@
             align-items: center;
             justify-content: center;
             padding-top: 100px; /* Offset for fixed nav */
+            position: relative;
         }
 
         .hero-wrapper {
@@ -228,34 +252,9 @@
         }
 
         .hero-text h1 {
-            font-size: 3.2rem;
+            font-size: clamp(2.4rem, 1.6rem + 3vw, 4rem);
             margin-bottom: 1.5rem;
-            line-height: 1.1;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-        }
-
-        .hero-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 80px;
-            width: 100%;
-        }
-
-        .hero-text {
-            flex: 1;
-            text-align: left;
-        }
-
-        html[dir="rtl"] .hero-text {
-            text-align: right;
-        }
-
-        .hero-text h1 {
-            font-size: 3.2rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
+            line-height: 1.05;
             font-weight: 800;
             letter-spacing: -0.03em;
         }
@@ -267,7 +266,7 @@
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: clamp(1rem, 0.9rem + 0.6vw, 1.35rem);
             color: var(--text-secondary);
             margin-bottom: 2rem;
             max-width: 600px;
@@ -291,8 +290,8 @@
             height: auto;
             max-height: 450px;
             border-radius: 20px;
-            border: 4px solid rgba(56, 189, 248, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(79, 209, 197, 0.35);
+            box-shadow: 0 24px 50px rgba(4, 8, 16, 0.45);
             object-fit: contain;
             transition: var(--transition);
         }
@@ -308,7 +307,7 @@
             align-items: center;
             gap: 8px;
             padding: 12px 30px;
-            border-radius: 5px;
+            border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
             border: none;
@@ -317,12 +316,12 @@
         .btn-primary {
             background: var(--gradient);
             color: #fff;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 10px 24px rgba(79, 209, 197, 0.25);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 14px 32px rgba(79, 209, 197, 0.35);
         }
 
         .btn-outline {
@@ -381,6 +380,12 @@
             display: block;
         }
 
+        .education-card p {
+            font-size: 0.9rem;
+            margin-top: 5px;
+            color: #cbd5e1;
+        }
+
         /* --- Skills Section --- */
         #skills {
             background-color: var(--bg-secondary);
@@ -421,12 +426,13 @@
         }
 
         .tag {
-            background: rgba(56, 189, 248, 0.1);
+            background: rgba(79, 209, 197, 0.12);
             color: var(--text-primary);
             padding: 6px 12px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 500;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         }
 
         /* --- Projects Section --- */
@@ -455,7 +461,7 @@
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--accent);
             box-shadow: var(--shadow-lg);
         }
@@ -499,16 +505,17 @@
             font-size: 0.75rem;
             color: var(--accent);
             padding: 4px 10px;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            background: rgba(79, 209, 197, 0.12);
+            border: 1px solid rgba(79, 209, 197, 0.25);
             border-radius: 9999px;
             font-weight: 600;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             margin: 0;
             transition: var(--transition);
         }
 
         .stack-item:hover {
-            background: rgba(56, 189, 248, 0.2);
+            background: rgba(79, 209, 197, 0.22);
         }
         
         html[dir="rtl"] .stack-item {
@@ -708,6 +715,41 @@
                 margin: 10px 0;
             }
         }
+
+        /* --- Wave Divider --- */
+        .custom-shape-divider-bottom-1689943683 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .custom-shape-divider-bottom-1689943683 svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 60px;
+        }
+
+        .custom-shape-divider-bottom-1689943683 .shape-fill {
+            fill: var(--bg-secondary);
+        }
+        
+        /* Typewriter Cursor */
+        .typewriter {
+            border-right: 2px solid var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent); }
+        }
     </style>
 </head>
 <body>
@@ -763,42 +805,6 @@
         </div>
     </header>
 
-    <style>
-        .custom-shape-divider-bottom-1689943683 {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-            transform: rotate(180deg);
-        }
-
-        .custom-shape-divider-bottom-1689943683 svg {
-            position: relative;
-            display: block;
-            width: calc(100% + 1.3px);
-            height: 60px;
-        }
-
-        .custom-shape-divider-bottom-1689943683 .shape-fill {
-            fill: var(--bg-secondary);
-        }
-        
-        /* Typewriter Cursor */
-        .typewriter {
-            border-right: 2px solid var(--accent);
-            white-space: nowrap;
-            overflow: hidden;
-            animation: blink-caret .75s step-end infinite;
-        }
-        
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--accent); }
-        }
-    </style>
-
     <!-- About Section -->
     <section id="about">
         <div class="container">
@@ -813,12 +819,12 @@
                     <div class="education-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                         <h4 data-i18n="edu_alx_title">ALX Africa Software Engineering Certificate</h4>
                         <span data-i18n="edu_alx_date">Feb 2023 – Jun 2025</span>
-                        <p style="font-size: 0.9rem; margin-top: 5px; color: #cbd5e1;" data-i18n="edu_alx_desc">Intensive program focusing on System Engineering, Algorithms, and Full-Stack Development.</p>
+                        <p data-i18n="edu_alx_desc">Intensive program focusing on System Engineering, Algorithms, and Full-Stack Development.</p>
                     </div>
                     <div class="education-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
                         <h4 data-i18n="edu_cu_title">Bachelor of Commerce</h4>
                         <span data-i18n="edu_cu_date">Cairo University | Aug 2018 – Jun 2023</span>
-                        <p style="font-size: 0.9rem; margin-top: 5px; color: #cbd5e1;" data-i18n="edu_cu_desc">Faculty of Commerce, providing a strong foundation in business and analytical thinking.</p>
+                        <p data-i18n="edu_cu_desc">Faculty of Commerce, providing a strong foundation in business and analytical thinking.</p>
                     </div>
                 </div>
             </div>
@@ -1048,24 +1054,28 @@
         let phraseIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
-        let typeSpeed = 100;
+        let typeSpeed = 120;
 
         function type() {
+            if (!typeWriterElement) {
+                return;
+            }
+
             const currentPhrase = phrases[phraseIndex];
-            
+
             if (isDeleting) {
-                typeWriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-                typeSpeed = 50;
+                charIndex = Math.max(0, charIndex - 1);
+                typeSpeed = 60;
             } else {
-                typeWriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
+                charIndex = Math.min(currentPhrase.length, charIndex + 1);
                 typeSpeed = 150;
             }
 
+            typeWriterElement.textContent = currentPhrase.substring(0, charIndex);
+
             if (!isDeleting && charIndex === currentPhrase.length) {
                 isDeleting = true;
-                typeSpeed = 2000; // Pause at end
+                typeSpeed = 1800;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 phraseIndex = (phraseIndex + 1) % phrases.length;
@@ -1075,8 +1085,11 @@
             setTimeout(type, typeSpeed);
         }
 
-        // Start Typewriter
-        document.addEventListener('DOMContentLoaded', type);
+        if (document.readyState !== 'loading') {
+            type();
+        } else {
+            document.addEventListener('DOMContentLoaded', type);
+        }
 
         const translations = {
             en: {
@@ -1086,7 +1099,7 @@
                 nav_projects: 'Projects',
                 nav_learning: 'Learning',
                 nav_contact: 'Contact',
-                hero_title: 'Hi, I\'m Abdelrahman Amer<br><span>Software Engineer</span>',
+                hero_title: 'Hi, I\'m Abdelrahman Amer<br><span class="typewriter">Software Engineer</span>',
                 hero_subtitle: 'Building robust backend systems, interactive web interfaces, and solving complex problems with clean code.',
                 btn_work: 'View My Work',
                 btn_cv: 'Download CV',
@@ -1129,7 +1142,7 @@
                 nav_projects: 'المشاريع',
                 nav_learning: 'التعلم',
                 nav_contact: 'تواصل معي',
-                hero_title: 'مرحباً، أنا عبد الرحمن عامر<br><span>مهندس برمجيات</span>',
+                hero_title: 'مرحباً، أنا عبد الرحمن عامر<br><span class="typewriter">مهندس برمجيات</span>',
                 hero_subtitle: 'بناء أنظمة خلفية قوية، وواجهات ويب تفاعلية، وحل المشكلات المعقدة بكود نظيف وفعال.',
                 btn_work: 'شاهد أعمالي',
                 btn_cv: 'تحميل السيرة الذاتية',
