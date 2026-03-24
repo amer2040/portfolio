@@ -98,6 +98,14 @@
             border-color: var(--accent-hover);
         }
 
+        /* Hide custom cursor on mobile */
+        @media (max-width: 768px) {
+            .cursor-dot,
+            .cursor-outline {
+                display: none;
+            }
+        }
+
         /* Animated Background */
         body::before {
             content: "";
@@ -891,6 +899,7 @@
             }
 
             .nav-links {
+                display: flex;
                 position: fixed;
                 left: -100%;
                 top: 70px;
@@ -926,7 +935,6 @@
 
             .nav-links.active {
                 left: 0;
-                display: flex;
             }
 
             html[dir="rtl"] .nav-links.active {
