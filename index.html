@@ -863,6 +863,17 @@
 
         /* --- Responsive Design --- */
         @media (max-width: 768px) {
+            nav {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: rgba(19, 19, 26, 0.95);
+            }
+
+            .nav-content {
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+            }
+
             .hamburger {
                 display: block;
             }
@@ -895,7 +906,7 @@
                 padding: 20px 0;
                 height: calc(100vh - 70px);
                 overflow-y: auto;
-                z-index: 999;
+                z-index: 9999;
             }
 
             html[dir="rtl"] .nav-links {
@@ -915,24 +926,9 @@
 
             .nav-links.active {
                 left: 0;
-                z-index: 999;
                 display: flex;
             }
 
-            html[dir="rtl"] .nav-links.active {
-                right: 0;
-                left: auto;
-                display: flex;
-            }
-                width: 100%;
-                padding: 10px;
-            }
-
-            .nav-links.active {
-                left: 0;
-                z-index: 1001;
-            }
-            
             html[dir="rtl"] .nav-links.active {
                 right: 0;
                 left: auto;
