@@ -910,12 +910,14 @@
                 -webkit-backdrop-filter: blur(20px);
                 width: 100%;
                 text-align: center;
-                transition: 0.3s;
+                transition: left 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
                 border-bottom: none;
                 padding: 20px 0;
                 height: calc(100vh - 70px);
                 overflow-y: auto;
                 z-index: 9999;
+                opacity: 0;
+                visibility: hidden;
             }
 
             html[dir="rtl"] .nav-links {
@@ -935,11 +937,15 @@
 
             .nav-links.active {
                 left: 0;
+                opacity: 1;
+                visibility: visible;
             }
 
             html[dir="rtl"] .nav-links.active {
                 right: 0;
                 left: auto;
+                opacity: 1;
+                visibility: visible;
             }
             
             .hero-wrapper {
