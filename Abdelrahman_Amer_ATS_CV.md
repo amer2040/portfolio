@@ -1,9 +1,9 @@
 # Abdelrahman Amer
 
-**Junior Software Engineer | Backend Developer | Full-Stack Developer**
+**Software Engineer | Backend Developer | AI Tools Builder**
 
 Phone: +20 100 650 3372  
-Location: Cairo, Egypt | Open to relocate to UAE  
+Location: Cairo, Egypt | Open to remote and relocation opportunities  
 Email: aboodamer7@gmail.com  
 LinkedIn: https://www.linkedin.com/in/abdelrahman-amer-pro  
 GitHub: https://github.com/amer2040  
@@ -11,7 +11,7 @@ Portfolio: https://abdoamer.me
 
 ## Professional Summary
 
-Junior Software Engineer with hands-on experience in backend and full-stack development using Python, Node.js, Express.js, Flask, MySQL, Redis, React, and Linux. Completed the ALX Africa Software Engineering program and built practical projects including REST APIs, database-backed applications, a crypto portfolio backend, a Flask task management app, and a custom UNIX shell in C. Strong foundation in problem solving, system-level programming, API development, database design, Git workflows, and Agile collaboration. Seeking a Junior Software Engineer, Backend Developer, or Full-Stack Developer role in the UAE.
+Software Engineer with hands-on experience in backend and full-stack development using Python, Node.js, Express.js, Flask, MySQL, Redis, React, and Linux. Completed the ALX Africa Software Engineering program and built practical projects including REST APIs, database-backed applications, a crypto portfolio backend, a Flask task management app, and a custom UNIX shell in C. Strong foundation in problem solving, system-level programming, API development, database design, Git workflows, Agile collaboration, and building practical AI-powered tools. Seeking Software Engineer, Backend Developer, or AI Tools Builder opportunities.
 
 ## Technical Skills
 
