@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdelrahman Amer | Software Engineer</title>
-    <meta name="description" content="Portfolio of Abdelrahman Amer, a Junior Software Engineer focused on backend APIs, full-stack web apps, and Linux-based systems.">
+    <meta name="description" content="Portfolio of Abdelrahman Amer, a Software Engineer focused on backend APIs, AI tools, full-stack web apps, and Linux-based systems.">
+    <link rel="canonical" href="https://abdoamer.me">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Abdelrahman Amer | Software Engineer">
+    <meta name="twitter:description" content="Backend APIs, AI tools, full-stack web apps, and Linux-based systems.">
+    <meta name="twitter:image" content="https://abdoamer.me/profile.png">
     
     <!-- Favicon -->
     <link rel="icon" href="https://img.icons8.com/color/48/code.png" type="image/png">
     
     <!-- Open Graph for Social Sharing -->
     <meta property="og:title" content="Abdelrahman Amer | Software Engineer">
-    <meta property="og:description" content="I build backend APIs, full-stack web apps, and Linux-based tools with clean, practical engineering.">
+    <meta property="og:description" content="I build backend APIs, AI-powered tools, full-stack web apps, and Linux-based systems with clean, practical engineering.">
     <meta property="og:image" content="https://abdoamer.me/profile.png">
     <meta property="og:url" content="https://abdoamer.me">
     
@@ -26,17 +31,13 @@
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
     <style>
         /* --- CSS Variables & Reset --- */
         :root {
             --bg-color: #0a0a0f;
             --bg-secondary: #13131a;
             --text-primary: #e6eaf2;
-            --text-secondary: #9aa4b2;
+            --text-secondary: #b4bdcb;
             --accent: #14b8a6;
             --accent-hover: #38bdf8;
             --accent-secondary: #5eead4;
@@ -90,8 +91,7 @@
             transition: all 0.3s ease;
         }
 
-        a:hover ~ .cursor-outline,
-        button:hover ~ .cursor-outline {
+        .cursor-outline.cursor-hover {
             width: 60px;
             height: 60px;
             opacity: 1;
@@ -807,7 +807,7 @@
         #learning {
             background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), url('https://picsum.photos/seed/techbg/1200/600.jpg');
             background-size: cover;
-            background-attachment: fixed;
+            
             text-align: center;
             padding: 100px 0;
         }
@@ -1047,8 +1047,8 @@
         /* Typewriter Cursor */
         .typewriter {
             border-right: 2px solid var(--accent);
-            white-space: nowrap;
-            overflow: hidden;
+            white-space: normal;
+            overflow-wrap: anywhere;
             animation: blink-caret .75s step-end infinite;
         }
         
@@ -1111,8 +1111,8 @@
     <header id="hero">
         <div class="container hero-wrapper">
             <div class="hero-text" data-aos="fade-right" data-aos-duration="1000">
-                <h1 data-i18n="hero_title">Hi, I'm Abdelrahman Amer<br><span class="typewriter">Junior Software Engineer</span></h1>
-                <p class="hero-subtitle" data-i18n="hero_subtitle">I build backend APIs, full-stack web apps, and Linux-based tools with clean, practical engineering.</p>
+                <h1 data-i18n="hero_title">Hi, I'm Abdelrahman Amer<br><span class="typewriter">Software Engineer</span></h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">I build backend APIs, AI-powered tools, full-stack web apps, and Linux-based systems with clean, practical engineering.</p>
                 <div class="hero-buttons">
                     <a href="#projects" class="btn btn-primary" data-i18n="btn_work">View My Work</a>
                     <!-- Download CV Button (Make sure CV.pdf exists in your repo) -->
@@ -1144,7 +1144,7 @@
             <h2 class="section-title"><span data-i18n="section_about">About</span> Me</h2>
             <div class="about-grid">
                 <div class="about-text" data-aos="fade-up" data-aos-duration="1000">
-                    <p data-i18n="about_p1">I am a Junior Software Engineer focused on backend APIs, full-stack web applications, and Linux-based systems. I combine software engineering training with a Commerce background, which helps me understand business workflows and build practical technical solutions.</p>
+                    <p data-i18n="about_p1">I am a Software Engineer focused on backend APIs, full-stack web applications, and Linux-based systems. I combine software engineering training with a Commerce background, which helps me understand business workflows and build practical technical solutions.</p>
                     <p data-i18n="about_p2">Through ALX Africa, I built a strong foundation in Python, C, JavaScript, Node.js, databases, infrastructure, algorithms, and collaborative development. I learn quickly, break problems down clearly, and work well in Agile environments.</p>
                     <p data-i18n="about_p3">I am focused on building real products, improving backend reliability, and growing with strong engineering teams through practical software development work.</p>
                 </div>
@@ -1396,7 +1396,7 @@
 
         // Typewriter Effect
         const typeWriterElement = document.querySelector('.typewriter');
-        const phrases = ["Junior Software Engineer", "Backend Developer", "Full-Stack Developer", "API Developer"];
+        const phrases = ["Software Engineer", "Backend Developer", "AI Tools Builder", "API Developer"];
         let phraseIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -1445,15 +1445,15 @@
                 nav_projects: 'Projects',
                 nav_learning: 'Learning',
                 nav_contact: 'Contact',
-                hero_title: 'Hi, I\'m Abdelrahman Amer<br><span class="typewriter">Junior Software Engineer</span>',
-                hero_subtitle: 'I build backend APIs, full-stack web apps, and Linux-based tools with clean, practical engineering.',
+                hero_title: 'Hi, I\'m Abdelrahman Amer<br><span class="typewriter">Software Engineer</span>',
+                hero_subtitle: 'I build backend APIs, AI-powered tools, full-stack web apps, and Linux-based systems with clean, practical engineering.',
                 btn_work: 'View My Work',
                 btn_cv: 'Download ATS CV',
                 btn_contact: 'Contact Me',
                 section_about: 'About',
-                about_p1: 'I am a Junior Software Engineer focused on backend APIs, full-stack web applications, and Linux-based systems. I combine software engineering training with a Commerce background, which helps me understand business workflows and build practical technical solutions.',
+                about_p1: 'I am a Software Engineer focused on backend APIs, full-stack web applications, and Linux-based systems. I combine software engineering training with a Commerce background, which helps me understand business workflows and build practical technical solutions.',
                 about_p2: 'Through ALX Africa, I built a strong foundation in Python, C, JavaScript, Node.js, databases, infrastructure, algorithms, and collaborative development. I learn quickly, break problems down clearly, and work well in Agile environments.',
-                about_p3: 'Whether it\'s engineering a Unix shell from scratch in C or deploying scalable REST APIs with Node.js, I am committed to delivering high-quality software solutions.',
+                about_p3: 'I am focused on building real products, improving backend reliability, and growing with strong engineering teams through practical software development work.',
                 edu_alx_title: 'ALX Africa Software Engineering Certificate',
                 edu_alx_date: 'Feb 2023 – Jun 2025',
                 edu_alx_desc: 'Intensive program focusing on System Engineering, Algorithms, and Full-Stack Development.',
@@ -1488,15 +1488,15 @@
                 nav_projects: 'المشاريع',
                 nav_learning: 'التعلم',
                 nav_contact: 'تواصل معي',
-                hero_title: 'مرحباً، أنا عبد الرحمن عامر<br><span class="typewriter">مهندس برمجيات مبتدئ</span>',
-                hero_subtitle: 'أبني واجهات API خلفية، وتطبيقات ويب متكاملة، وأدوات مبنية على Linux بكود عملي ونظيف.',
+                hero_title: 'مرحباً، أنا عبد الرحمن عامر<br><span class="typewriter">مهندس برمجيات</span>',
+                hero_subtitle: 'أبني واجهات API خلفية، وأدوات مدعومة بالذكاء الاصطناعي، وتطبيقات ويب متكاملة، وأنظمة مبنية على Linux بكود عملي ونظيف.',
                 btn_work: 'شاهد أعمالي',
                 btn_cv: 'تحميل CV ATS',
                 btn_contact: 'تواصل معي',
                 section_about: 'نبذة',
                 about_p1: 'مهندس برمجيات منضبط وملتزم جداً، لدي أساس قوي في تطوير الويب الكامل (Full-stack) والبرمجة على مستوى النظام (System-level). بخلفية تجارية من كلية التجارة، أمزج بين التفكير المنطقي والدقة التقنية.',
                 about_p2: 'رحلتي تتضمن تدريباً مكثفاً في ALX Africa، حيث حسنت مهاراتي في Python و C وتقنيات الويب الحديثة. لدي قدرة مثبتة على التعلم الذاتي السريع وتفكيك المشكلات، والعمل في بيئة Agile.',
-                about_p3: 'سواء كان الأمر يتعلق بهندسة Unix Shell من الصفر بلغة C أو نشر واجهات برمجة تطبيقات REST قابلة للتوسع باستخدام Node.js، أنا ملتزم بتقديم حلول برمجية عالية الجودة.',
+                about_p3: 'أركز على بناء منتجات حقيقية، وتحسين اعتمادية أنظمة الـ Backend، والتطور مع فرق هندسية قوية من خلال تطوير برمجيات عملي وفعال.',
                 edu_alx_title: 'شهادة هندسة البرمجيات - ALX Africa',
                 edu_alx_date: 'فبراير 2023 – يونيو 2025',
                 edu_alx_desc: 'برنامج مكثف يركز على هندسة النظم، الخوارزميات، وتطوير الويب الكامل.',
@@ -1555,8 +1555,14 @@
             navLinks.classList.toggle('active');
         }
 
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         // ========== Three.js 3D Background ==========
         const canvas = document.getElementById('three-canvas');
+        if (reducedMotion && canvas) {
+            canvas.style.display = 'none';
+        }
+        if (!reducedMotion && window.THREE) {
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
@@ -1663,10 +1669,13 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
+        }
+
         // ========== Custom Cursor ==========
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
 
+        if (!reducedMotion && cursorDot && cursorOutline) {
         window.addEventListener('mousemove', (e) => {
             const posX = e.clientX;
             const posY = e.clientY;
@@ -1680,9 +1689,15 @@
             }, { duration: 500, fill: "forwards" });
         });
 
-        // ========== GSAP Animations - Disabled ==========
-        // GSAP is disabled to avoid visibility conflicts
-        // gsap.registerPlugin(ScrollTrigger);
+        document.querySelectorAll('a, button').forEach((el) => {
+            el.addEventListener('mouseenter', () => cursorOutline.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('cursor-hover'));
+        });
+        } else {
+            document.querySelectorAll('.cursor-dot, .cursor-outline').forEach((el) => {
+                el.style.display = 'none';
+            });
+        }
     </script>
 </body>
 </html>
