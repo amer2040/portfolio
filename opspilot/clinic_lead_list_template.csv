@@ -1,0 +1,4 @@
+business_name,niche,city,country,website_or_profile,contact_channel,pain_point,custom_opener,offer_angle,status,notes
+Example Dental Clinic,dental clinic,Cairo,Egypt,https://example.com,Instagram/WhatsApp,missed booking follow-ups,"لاحظت إن العيادة عندها خدمات كتير غالبا بيجيلها استفسارات أسعار ومواعيد من كذا قناة.",AI front desk + daily booking report,not_contacted,Use only after approval
+Example Beauty Center,cosmetic clinic,Giza,Egypt,https://example.com,Facebook/WhatsApp,lead qualification and follow-up,"واضح إن عندكم عروض وخدمات متعددة، وده بيحتاج متابعة سريعة لكل lead قبل ما يروح لمنافس.",72-hour lead capture and follow-up sprint,not_contacted,Use only after approval
+Example Course Center,education center,Online,Egypt,https://example.com,Facebook Messenger,course inquiry tracking,"شوفت إن عندكم دفعات/كورسات مختلفة؛ ممكن نظام بسيط يجمع الاستفسارات ويطلع تقرير يومي للمالك.",daily leads report from forms/sheets,not_contacted,Second-priority niche

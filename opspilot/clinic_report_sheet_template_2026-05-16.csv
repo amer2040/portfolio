@@ -1,0 +1,4 @@
+lead_id,created_date,source,patient_name,phone,service_requested,clinic_type,area,preferred_day_time,intent,urgency_flag,lead_score,status,next_action,owner_note,last_follow_up,assigned_to
+CL-0001,2026-05-16,WhatsApp,Sample Patient,01000000000,Teeth whitening,Dental,Nasr City,Tomorrow after 6 PM,Booking request,No,60,Warm,Send available slots,Asked about price then requested appointment,,Reception
+CL-0002,2026-05-16,Instagram DM,Sample Patient 2,01000000001,Filler,Aesthetic,New Cairo,Friday afternoon,Price inquiry,No,40,Warm,Ask for consultation booking,Needs price range only,,Sales
+CL-0003,2026-05-16,Facebook,Sample Urgent,01000000002,Dental pain,Dental,Heliopolis,Today,Emergency symptom,Yes,80,Urgent,Call immediately,Severe swelling mentioned,,Reception

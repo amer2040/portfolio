@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpsPilot | AI Front Desk for Clinics</title>
+  <meta name="description" content="OpsPilot installs an AI-assisted front desk system for clinics: capture patient inquiries, qualify booking intent, automate follow-up, and send daily owner reports.">
+  <link rel="canonical" href="https://opspilot.abdoamer.me/">
+  <meta property="og:title" content="OpsPilot | AI Front Desk for Clinics">
+  <meta property="og:description" content="نظام استقبال ذكي للعيادات يلتقط الاستفسارات، يؤهل نية الحجز، يتابع تلقائياً، ويرسل تقرير يومي للمالك.">
+  <meta property="og:url" content="https://opspilot.abdoamer.me/">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#06100d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #06100d;
+      --bg-deep: #030706;
+      --surface: #0d1915;
+      --surface-2: #12241e;
+      --line: rgba(190, 174, 145, 0.18);
+      --line-strong: rgba(0, 217, 146, 0.42);
+      --ink: #f4efe3;
+      --muted: #c6bda9;
+      --soft: #7f8f86;
+      --signal: #00d992;
+      --mint: #76f7c8;
+      --amber: #d7a84f;
+      --danger: #ff7a6f;
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+      --radius: 22px;
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --latin: 'Manrope', system-ui, sans-serif;
+      --arabic: 'IBM Plex Sans Arabic', 'Manrope', system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(0, 217, 146, 0.16), transparent 28rem),
+        radial-gradient(circle at 84% 18%, rgba(215, 168, 79, 0.11), transparent 26rem),
+        linear-gradient(135deg, var(--bg-deep), var(--bg) 45%, #081611);
+      color: var(--ink);
+      font-family: var(--arabic);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body[data-lang="en"] { font-family: var(--latin); }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .28;
+      background-image:
+        linear-gradient(rgba(244,239,227,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244,239,227,.06) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, black, transparent 75%);
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+    .mono { font-family: var(--mono); }
+    .accent { color: var(--signal); }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(3, 7, 6, .72);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: -.03em; }
+    .mark {
+      width: 38px; height: 38px; border-radius: 12px;
+      display: grid; place-items: center;
+      background: linear-gradient(145deg, #0e241d, #07100d);
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 0 22px rgba(0,217,146,.24), inset 0 1px 0 rgba(255,255,255,.06);
+      color: var(--signal);
+      animation: pulse 3.4s ease-in-out infinite;
+    }
+    .navlinks { display: flex; align-items: center; gap: 22px; color: var(--muted); font-size: 14px; font-weight: 600; }
+    .navlinks a:hover { color: var(--ink); }
+    .language {
+      display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: 999px;
+      background: rgba(255,255,255,.04);
+    }
+    .language button {
+      border: 0; color: var(--muted); background: transparent; padding: 8px 12px; border-radius: 999px; cursor: pointer;
+      min-width: 48px;
+    }
+    .language button.active { color: #02110c; background: var(--signal); font-weight: 800; }
+
+    .hero { padding: 86px 0 64px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 48px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; color: var(--mint); font-family: var(--mono); font-size: 12px;
+      letter-spacing: .08em; text-transform: uppercase; border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px;
+      background: rgba(0,217,146,.06);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 16px var(--signal); }
+    h1 {
+      margin: 22px 0 18px;
+      font-size: clamp(42px, 7vw, 92px);
+      line-height: .95;
+      letter-spacing: -.065em;
+      text-wrap: balance;
+    }
+    [dir="rtl"] h1 { letter-spacing: -.045em; }
+    .lead { max-width: 690px; color: var(--muted); font-size: clamp(18px, 2.2vw, 23px); margin: 0 0 30px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 13px 18px;
+      border-radius: 999px; border: 1px solid var(--line); color: var(--ink); font-weight: 800; transition: .2s ease;
+    }
+    .btn.primary { background: var(--signal); color: #04100c; border-color: var(--signal); box-shadow: 0 18px 50px rgba(0,217,146,.22); }
+    .btn.secondary { background: rgba(255,255,255,.05); }
+    .btn:hover { transform: translateY(-2px); border-color: var(--line-strong); }
+    .microcopy { color: var(--soft); font-size: 13px; margin-top: 18px; }
+    .proof-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .proof-pill { border: 1px solid var(--line); border-radius: 999px; padding: 8px 11px; color: var(--muted); background: rgba(255,255,255,.035); font-size: 12px; font-weight: 700; }
+
+    .console {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(18,36,30,.94), rgba(7,15,12,.96));
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.06);
+      overflow: hidden;
+      position: relative;
+    }
+    .console::after { content: ""; position: absolute; inset: auto 26px -70px 26px; height: 130px; background: rgba(0,217,146,.18); filter: blur(60px); }
+    .console-head { display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; border-bottom: 1px solid var(--line); color: var(--soft); font-family: var(--mono); font-size: 12px; }
+    .lights { display: flex; gap: 7px; }
+    .lights i { width: 10px; height: 10px; border-radius: 50%; background: var(--soft); opacity: .7; }
+    .lights i:nth-child(1) { background: var(--danger); } .lights i:nth-child(2) { background: var(--amber); } .lights i:nth-child(3) { background: var(--signal); }
+    .chat { padding: 22px; display: grid; gap: 14px; }
+    .bubble { max-width: 86%; padding: 14px 16px; border-radius: 18px; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.08); color: var(--muted); }
+    .bubble.bot { justify-self: start; border-color: rgba(0,217,146,.28); color: var(--ink); }
+    .bubble.user { justify-self: end; background: rgba(0,217,146,.10); }
+    .scorecard { margin: 6px 22px 22px; padding: 18px; border: 1px solid var(--line-strong); border-radius: 20px; background: rgba(0,217,146,.07); position: relative; z-index: 1; }
+    .scoregrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+    .metric { background: rgba(0,0,0,.25); border: 1px solid var(--line); border-radius: 14px; padding: 12px; }
+    .metric strong { display: block; font-size: 24px; color: var(--signal); line-height: 1; }
+    .metric span { color: var(--soft); font-size: 12px; }
+
+    section { padding: 78px 0; }
+    .section-head { display: grid; grid-template-columns: .8fr 1fr; gap: 32px; align-items: end; margin-bottom: 28px; }
+    .kicker { color: var(--signal); font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    h2 { margin: 8px 0 0; font-size: clamp(30px, 4.3vw, 56px); line-height: 1.05; letter-spacing: -.045em; text-wrap: balance; }
+    .section-head p { margin: 0; color: var(--muted); font-size: 18px; }
+
+    .pain-grid, .feature-grid, .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card {
+      border: 1px solid var(--line); background: rgba(13,25,21,.74); border-radius: var(--radius); padding: 24px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04); min-height: 100%;
+    }
+    .card.hot { border-color: var(--line-strong); background: linear-gradient(180deg, rgba(0,217,146,.11), rgba(13,25,21,.76)); }
+    .num { font-family: var(--mono); color: var(--signal); font-size: 13px; }
+    h3 { margin: 12px 0 9px; font-size: 22px; line-height: 1.25; }
+    .card p, .card li { color: var(--muted); margin: 0; }
+    .card ul { padding: 0; margin: 16px 0 0; list-style: none; display: grid; gap: 10px; }
+    .card li::before { content: "//"; color: var(--signal); font-family: var(--mono); margin-inline-end: 8px; }
+
+    .system-map { display: grid; grid-template-columns: 1fr .9fr; gap: 16px; align-items: stretch; }
+    .pipeline { display: grid; gap: 12px; }
+    .step { display: grid; grid-template-columns: auto 1fr; gap: 14px; padding: 18px; border: 1px dashed rgba(118,247,200,.32); border-radius: 18px; background: rgba(255,255,255,.035); }
+    .step b { color: var(--ink); }
+    .step p { color: var(--muted); margin: 4px 0 0; }
+    .badge { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: #03110c; background: var(--signal); font-family: var(--mono); font-weight: 800; }
+    .report { padding: 24px; border-radius: 24px; border: 1px solid var(--line-strong); background: #07110e; box-shadow: var(--shadow); }
+    .report-row { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+    .report-row strong { color: var(--ink); }
+    .report-row:last-child { border-bottom: 0; }
+
+    .pricing-card { position: relative; overflow: hidden; }
+    .pricing-card.featured::before { content: "Best first build"; position: absolute; top: 18px; inset-inline-end: 18px; border: 1px solid var(--line-strong); color: var(--signal); border-radius: 999px; padding: 5px 9px; font-family: var(--mono); font-size: 10px; background: rgba(0,217,146,.08); }
+    .price { font-size: 42px; line-height: 1; margin: 12px 0; letter-spacing: -.05em; }
+    .tag { display: inline-flex; color: var(--mint); border: 1px solid var(--line-strong); border-radius: 999px; padding: 5px 10px; font-size: 12px; font-family: var(--mono); }
+
+    .safety { display: grid; grid-template-columns: .75fr 1.25fr; gap: 16px; align-items: center; border: 1px solid rgba(215,168,79,.34); background: rgba(215,168,79,.06); border-radius: 28px; padding: 28px; }
+    .shield { font-size: 72px; line-height: 1; color: var(--amber); }
+
+    .final-cta { text-align: center; padding: 96px 0; }
+    .final-cta h2 { margin-inline: auto; max-width: 860px; }
+    .final-cta p { color: var(--muted); font-size: 20px; max-width: 760px; margin: 18px auto 28px; }
+    footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--soft); }
+    .foot { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+
+    [data-i18n] { transition: opacity .16s ease; }
+    .switching [data-i18n] { opacity: .15; }
+    @keyframes pulse { 50% { box-shadow: 0 0 34px rgba(0,217,146,.44), inset 0 1px 0 rgba(255,255,255,.08); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; scroll-behavior: auto !important; transition: none !important; } }
+    @media (max-width: 920px) {
+      .hero-grid, .section-head, .system-map, .safety { grid-template-columns: 1fr; }
+      .pain-grid, .feature-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .navlinks a { display: none; }
+      .hero { padding-top: 54px; }
+      .scoregrid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 28px, 1160px); }
+      .nav { min-height: 66px; }
+      .brand span { font-size: 16px; }
+      .hero { padding: 40px 0 32px; }
+      .actions .btn { width: 100%; }
+      section { padding: 52px 0; }
+      .console-head { align-items: flex-start; gap: 10px; flex-direction: column; }
+      .bubble { max-width: 100%; }
+    }
+  </style>
+</head>
+<body data-lang="en">
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="OpsPilot home"><span class="mark">OP</span><span>OpsPilot</span></a>
+      <div class="navlinks">
+        <a href="#system" data-i18n="nav.system">System</a>
+        <a href="#packages" data-i18n="nav.packages">Packages</a>
+        <a href="#safety" data-i18n="nav.safety">Safety</a>
+        <div class="language" aria-label="Language switcher">
+          <button type="button" data-set-lang="ar">AR</button>
+          <button type="button" class="active" data-set-lang="en">EN</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span><span data-i18n="hero.eyebrow">Clinic Front Desk System</span></div>
+          <h1 data-i18n="hero.title">Stop losing clinic bookings between messages and follow-ups.</h1>
+          <p class="lead" data-i18n="hero.lead">OpsPilot installs an AI-assisted front desk for clinics: capture patient inquiries, qualify booking intent, automate follow-up, and send owners a daily report on the booking pipeline.</p>
+          <div class="actions">
+            <a class="btn primary" href="mailto:hello@opspilot.abdoamer.me?subject=OpsPilot%20Free%20Audit" data-i18n="hero.cta">Book a workflow audit</a>
+            <a class="btn secondary" href="#system" data-i18n="hero.secondary">See the system</a>
+          </div>
+          <p class="microcopy" data-i18n="hero.micro">One clear system in 7 days: capture, qualify, follow up, and report - no diagnosis and no medical promises.</p>
+          <div class="proof-strip" aria-label="OpsPilot delivery promises">
+            <span class="proof-pill" data-i18n="proof.one">7-day setup</span>
+            <span class="proof-pill" data-i18n="proof.two">WhatsApp-ready workflow</span>
+            <span class="proof-pill" data-i18n="proof.three">Human handoff rules</span>
+          </div>
+        </div>
+
+        <div class="console" aria-label="OpsPilot conversation preview">
+          <div class="console-head"><div class="lights"><i></i><i></i><i></i></div><span class="mono">opspilot / clinic-intake</span></div>
+          <div class="chat">
+            <div class="bubble user" data-i18n="chat.user">What is the teeth whitening price and nearest slot?</div>
+            <div class="bubble bot" data-i18n="chat.bot">Pricing depends on the case. I can prepare a booking request for the team. I need your name, WhatsApp number, and preferred day.</div>
+            <div class="bubble user" data-i18n="chat.user2">Ahmed - 010... - tomorrow evening</div>
+          </div>
+          <div class="scorecard">
+            <span class="tag" data-i18n="score.tag">LEAD STATUS: HOT</span>
+            <div class="scoregrid">
+              <div class="metric"><strong>+8</strong><span data-i18n="score.intent">Booking intent</span></div>
+              <div class="metric"><strong>3</strong><span data-i18n="score.fields">Fields captured</span></div>
+              <div class="metric"><strong>1</strong><span data-i18n="score.handoff">Human handoff</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="kicker" data-i18n="problem.kicker">The leak</span><h2 data-i18n="problem.title">Clinics lose patients when operations are scattered.</h2></div>
+          <p data-i18n="problem.lead">Inquiries arrive through WhatsApp, Facebook, Instagram, and calls. Replies slow down, follow-ups are forgotten, and owners discover the leak after the opportunity is gone.</p>
+        </div>
+        <div class="pain-grid">
+          <article class="card"><span class="num">01</span><h3 data-i18n="pain.one.title">Repeated FAQs</h3><p data-i18n="pain.one.body">Pricing, services, location, and working-hour questions consume the team every day.</p></article>
+          <article class="card hot"><span class="num">02</span><h3 data-i18n="pain.two.title">Leads go cold</h3><p data-i18n="pain.two.body">A ready-to-book patient can disappear when replies are delayed or details are not captured cleanly.</p></article>
+          <article class="card"><span class="num">03</span><h3 data-i18n="pain.three.title">No clear report</h3><p data-i18n="pain.three.body">Owners need one summary for new leads, booking requests, and follow-ups that matter.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="system">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="kicker" data-i18n="system.kicker">The system</span><h2 data-i18n="system.title">A complete AI front desk: from first message to daily owner report.</h2></div>
+          <p data-i18n="system.lead">We sell an operating system, not a cheap chatbot: inquiry capture, booking qualification, staff handoff, follow-up, and a daily report showing missed and upcoming opportunities.</p>
+        </div>
+        <div class="system-map">
+          <div class="pipeline">
+            <div class="step"><span class="badge">1</span><div><b data-i18n="step.one.title">Custom FAQ replies</b><p data-i18n="step.one.body">Services, estimated ranges, working hours, location, and handoff rules.</p></div></div>
+            <div class="step"><span class="badge">2</span><div><b data-i18n="step.two.title">Structured lead capture</b><p data-i18n="step.two.body">Name, WhatsApp, service, preferred day, and urgency signals.</p></div></div>
+            <div class="step"><span class="badge">3</span><div><b data-i18n="step.three.title">Booking intent scoring</b><p data-i18n="step.three.body">Classify Hot/Warm/Cold/Urgent so the team starts with the most valuable leads.</p></div></div>
+            <div class="step"><span class="badge">4</span><div><b data-i18n="step.four.title">Daily owner report</b><p data-i18n="step.four.body">A daily email or Telegram summary of leads, follow-ups, and booking opportunities.</p></div></div>
+          </div>
+          <aside class="report">
+            <span class="tag" data-i18n="report.tag">DAILY REPORT</span>
+            <div class="report-row"><span data-i18n="report.leads">New leads</span><strong>18</strong></div>
+            <div class="report-row"><span data-i18n="report.hot">Hot leads</span><strong>6</strong></div>
+            <div class="report-row"><span data-i18n="report.bookings">Booking requests</span><strong>9</strong></div>
+            <div class="report-row"><span data-i18n="report.service">Top requested service</span><strong data-i18n="report.serviceValue">Whitening</strong></div>
+            <div class="report-row"><span data-i18n="report.action">Tomorrow action</span><strong data-i18n="report.actionValue">Call 3 hot leads</strong></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="packages">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="kicker" data-i18n="packages.kicker">Founder packages</span><h2 data-i18n="packages.title">Clear founder packages for the first clinics using OpsPilot.</h2></div>
+          <p data-i18n="packages.lead">We start with a controlled scope to prove value fast. No open-ended delivery, no revenue guarantees, and no medical automation claims.</p>
+        </div>
+        <div class="pricing-grid">
+          <article class="card pricing-card"><span class="tag">Audit</span><h3 data-i18n="pkg.starter.title">Workflow Audit</h3><div class="price">Free</div><ul><li data-i18n="pkg.starter.one">Review current message channels</li><li data-i18n="pkg.starter.two">Find where bookings leak</li><li data-i18n="pkg.starter.three">Plan the first workflow build</li></ul></article>
+          <article class="card pricing-card hot featured"><span class="tag">Founder</span><h3 data-i18n="pkg.growth.title">Clinic Front Desk Sprint</h3><div class="price">$299</div><ul><li data-i18n="pkg.growth.one">One front-desk workflow installed</li><li data-i18n="pkg.growth.two">Hot/Warm/Urgent qualification</li><li data-i18n="pkg.growth.three">Daily report and staff handoff</li></ul></article>
+          <article class="card pricing-card"><span class="tag">Managed</span><h3 data-i18n="pkg.managed.title">Control Room</h3><div class="price">$99/mo</div><ul><li data-i18n="pkg.managed.one">Weekly reply optimization</li><li data-i18n="pkg.managed.two">Lead-data quality checks</li><li data-i18n="pkg.managed.three">Monthly improvement report</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="safety">
+      <div class="wrap safety">
+        <div class="shield">◇</div>
+        <div><span class="kicker" data-i18n="safety.kicker">Safety first</span><h2 data-i18n="safety.title">The assistant does not diagnose or prescribe treatment.</h2><p data-i18n="safety.body">Any medical case, severe pain, bleeding, swelling, sensitive complaint, or final-price request is handed to the human team immediately. OpsPilot supports operations; it does not replace doctors or booking staff.</p></div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="wrap">
+        <h2 data-i18n="cta.title">Ready to see the system on your clinic?</h2>
+        <p data-i18n="cta.body">Send your clinic type and current message channels. We will review the leak, pick one workflow, and tell you honestly whether OpsPilot is a fit right now.</p>
+        <div class="actions" style="justify-content:center"><a class="btn primary" href="mailto:hello@opspilot.abdoamer.me?subject=OpsPilot%20Clinic%20Audit" data-i18n="cta.button">Book a workflow audit</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot"><span>OpsPilot</span><span class="mono">opspilot.abdoamer.me</span></div>
+  </footer>
+
+  <script>
+    const copy = {
+      "ar": {
+            "nav.system": "النظام",
+            "nav.packages": "الباقات",
+            "nav.safety": "الأمان",
+            "hero.eyebrow": "Clinic Front Desk System",
+            "hero.title": "أوقف ضياع حجوزات العيادة بين الرسائل والمتابعات.",
+            "hero.lead": "OpsPilot يركب للعيادات نظام استقبال ذكي يلتقط استفسارات المرضى، يؤهل نية الحجز، يتابع تلقائيا، ويرسل للمالك تقريرا يوميا بما حدث في خط الحجوزات.",
+            "hero.cta": "احجز فحص Workflow",
+            "hero.secondary": "شوف النظام",
+            "hero.micro": "نبدأ بنظام واحد واضح خلال 7 أيام: التقاط، تأهيل، متابعة، وتقرير يومي - بدون تشخيص طبي أو وعود علاجية.",
+            "proof.one": "تجهيز خلال 7 أيام",
+            "proof.two": "Workflow جاهز لواتساب",
+            "proof.three": "قواعد تحويل للفريق",
+            "chat.user": "عايز أعرف سعر تبييض الأسنان وأقرب ميعاد؟",
+            "chat.bot": "السعر بيختلف حسب الحالة. أقدر أجهز طلب حجز للفريق. محتاج الاسم، رقم WhatsApp، واليوم المناسب.",
+            "chat.user2": "أحمد - 010... - بكرة بالليل",
+            "score.tag": "LEAD STATUS: HOT",
+            "score.intent": "نية حجز",
+            "score.fields": "بيانات اتجمعت",
+            "score.handoff": "تحويل لموظف",
+            "problem.kicker": "The leak",
+            "problem.title": "العيادات لا تخسر المرضى بسبب الطب فقط؛ تخسرهم بسبب تشغيل مشتت.",
+            "problem.lead": "الرسائل تأتي من واتساب، فيسبوك، إنستجرام، والمكالمات. الرد يتأخر، المتابعة تنسى، والمالك يكتشف التسريب بعد فوات الفرصة.",
+            "pain.one.title": "FAQs متكررة",
+            "pain.one.body": "نفس أسئلة الأسعار، المواعيد، العنوان، والخدمات بتاخد وقت الفريق كل يوم.",
+            "pain.two.title": "Leads بتضيع",
+            "pain.two.body": "العميل اللي جاهز يحجز ممكن يختفي لو الرد اتأخر أو البيانات ما اتجمعتش صح.",
+            "pain.three.title": "لا يوجد تقرير واضح",
+            "pain.three.body": "المدير محتاج يشوف العملاء الجدد، طلبات الحجز، والمتابعات المهمة في ملخص واحد.",
+            "system.kicker": "The system",
+            "system.title": "AI front desk كامل: من أول رسالة إلى تقرير المالك اليومي.",
+            "system.lead": "نبيع نظام تشغيل، وليس شات بوت رخيص: التقاط الاستفسار، تأهيل نية الحجز، تحويل للفريق، متابعة، وتقرير يومي يوضح الفرص الضائعة والقادمة.",
+            "step.one.title": "ردود FAQ مخصصة",
+            "step.one.body": "الخدمات، الأسعار التقريبية، ساعات العمل، العنوان، وقواعد التحويل.",
+            "step.two.title": "Lead capture منظم",
+            "step.two.body": "الاسم، WhatsApp، الخدمة، اليوم المفضل، وهل الحالة عاجلة.",
+            "step.three.title": "Booking intent scoring",
+            "step.three.body": "تمييز Hot/Warm/Cold/Urgent علشان الفريق يبدأ بالأهم.",
+            "step.four.title": "Daily owner report",
+            "step.four.body": "ملخص يومي بالبريد أو Telegram عن العملاء والمتابعات والفرص.",
+            "report.tag": "DAILY REPORT",
+            "report.leads": "New leads",
+            "report.hot": "Hot leads",
+            "report.bookings": "Booking requests",
+            "report.service": "Top requested service",
+            "report.serviceValue": "تبييض",
+            "report.action": "Tomorrow action",
+            "report.actionValue": "اتصل بـ 3 leads ساخنة",
+            "packages.kicker": "Founder packages",
+            "packages.title": "باقات Founder واضحة لأول عيادات تدخل النظام.",
+            "packages.lead": "نبدأ بسكوب محدود عشان نثبت القيمة بسرعة. لا تنفيذ مفتوح، لا وعود إيراد، ولا أتمتة طبية.",
+            "pkg.starter.title": "Workflow Audit",
+            "pkg.starter.one": "مراجعة قنوات الرسائل الحالية",
+            "pkg.starter.two": "تحديد أين تضيع الحجوزات",
+            "pkg.starter.three": "خطة تنفيذ لأول workflow",
+            "pkg.growth.title": "Clinic Front Desk Sprint",
+            "pkg.growth.one": "تركيب workflow استقبال واحد",
+            "pkg.growth.two": "تأهيل Hot/Warm/Urgent",
+            "pkg.growth.three": "تقرير يومي وتحويل للفريق",
+            "pkg.managed.title": "Control Room",
+            "pkg.managed.one": "تحسين الردود أسبوعيا",
+            "pkg.managed.two": "متابعة جودة البيانات",
+            "pkg.managed.three": "تقرير تحسين شهري",
+            "safety.kicker": "Safety first",
+            "safety.title": "المساعد لا يشخص ولا يصف علاج.",
+            "safety.body": "أي حالة طبية، ألم شديد، نزيف، تورم، شكوى حساسة، أو طلب سعر نهائي يتم تحويله للفريق البشري فورا. النظام يساعد في التشغيل، وليس بديلا عن الطبيب أو موظف الحجز.",
+            "cta.title": "جاهز تشوف شكل النظام على عيادتك؟",
+            "cta.body": "ابعت نوع العيادة وقنوات الرسائل الحالية. هنراجع التسريب، نختار workflow واحد، ونقول لك بصراحة هل OpsPilot مناسب دلوقتي أم لا.",
+            "cta.button": "احجز فحص Workflow"
+      },
+      "en": {
+            "nav.system": "System",
+            "nav.packages": "Packages",
+            "nav.safety": "Safety",
+            "hero.eyebrow": "Clinic Front Desk System",
+            "hero.title": "Stop losing clinic bookings between messages and follow-ups.",
+            "hero.lead": "OpsPilot installs an AI-assisted front desk for clinics: capture patient inquiries, qualify booking intent, automate follow-up, and send owners a daily report on the booking pipeline.",
+            "hero.cta": "Book a workflow audit",
+            "hero.secondary": "See the system",
+            "hero.micro": "One clear system in 7 days: capture, qualify, follow up, and report - no diagnosis and no medical promises.",
+            "proof.one": "7-day setup",
+            "proof.two": "WhatsApp-ready workflow",
+            "proof.three": "Human handoff rules",
+            "chat.user": "What is the teeth whitening price and nearest slot?",
+            "chat.bot": "Pricing depends on the case. I can prepare a booking request for the team. I need your name, WhatsApp number, and preferred day.",
+            "chat.user2": "Ahmed - 010... - tomorrow evening",
+            "score.tag": "LEAD STATUS: HOT",
+            "score.intent": "Booking intent",
+            "score.fields": "Fields captured",
+            "score.handoff": "Human handoff",
+            "problem.kicker": "The leak",
+            "problem.title": "Clinics lose patients when operations are scattered.",
+            "problem.lead": "Inquiries arrive through WhatsApp, Facebook, Instagram, and calls. Replies slow down, follow-ups are forgotten, and owners discover the leak after the opportunity is gone.",
+            "pain.one.title": "Repeated FAQs",
+            "pain.one.body": "Pricing, services, location, and working-hour questions consume the team every day.",
+            "pain.two.title": "Leads go cold",
+            "pain.two.body": "A ready-to-book patient can disappear when replies are delayed or details are not captured cleanly.",
+            "pain.three.title": "No clear report",
+            "pain.three.body": "Owners need one summary for new leads, booking requests, and follow-ups that matter.",
+            "system.kicker": "The system",
+            "system.title": "A complete AI front desk: from first message to daily owner report.",
+            "system.lead": "We sell an operating system, not a cheap chatbot: inquiry capture, booking qualification, staff handoff, follow-up, and a daily report showing missed and upcoming opportunities.",
+            "step.one.title": "Custom FAQ replies",
+            "step.one.body": "Services, estimated ranges, working hours, location, and handoff rules.",
+            "step.two.title": "Structured lead capture",
+            "step.two.body": "Name, WhatsApp, service, preferred day, and urgency signals.",
+            "step.three.title": "Booking intent scoring",
+            "step.three.body": "Classify Hot/Warm/Cold/Urgent so the team starts with the most valuable leads.",
+            "step.four.title": "Daily owner report",
+            "step.four.body": "A daily email or Telegram summary of leads, follow-ups, and booking opportunities.",
+            "report.tag": "DAILY REPORT",
+            "report.leads": "New leads",
+            "report.hot": "Hot leads",
+            "report.bookings": "Booking requests",
+            "report.service": "Top requested service",
+            "report.serviceValue": "Whitening",
+            "report.action": "Tomorrow action",
+            "report.actionValue": "Call 3 hot leads",
+            "packages.kicker": "Founder packages",
+            "packages.title": "Clear founder packages for the first clinics using OpsPilot.",
+            "packages.lead": "We start with a controlled scope to prove value fast. No open-ended delivery, no revenue guarantees, and no medical automation claims.",
+            "pkg.starter.title": "Workflow Audit",
+            "pkg.starter.one": "Review current message channels",
+            "pkg.starter.two": "Find where bookings leak",
+            "pkg.starter.three": "Plan the first workflow build",
+            "pkg.growth.title": "Clinic Front Desk Sprint",
+            "pkg.growth.one": "One front-desk workflow installed",
+            "pkg.growth.two": "Hot/Warm/Urgent qualification",
+            "pkg.growth.three": "Daily report and staff handoff",
+            "pkg.managed.title": "Control Room",
+            "pkg.managed.one": "Weekly reply optimization",
+            "pkg.managed.two": "Lead-data quality checks",
+            "pkg.managed.three": "Monthly improvement report",
+            "safety.kicker": "Safety first",
+            "safety.title": "The assistant does not diagnose or prescribe treatment.",
+            "safety.body": "Any medical case, severe pain, bleeding, swelling, sensitive complaint, or final-price request is handed to the human team immediately. OpsPilot supports operations; it does not replace doctors or booking staff.",
+            "cta.title": "Ready to see the system on your clinic?",
+            "cta.body": "Send your clinic type and current message channels. We will review the leak, pick one workflow, and tell you honestly whether OpsPilot is a fit right now.",
+            "cta.button": "Book a workflow audit"
+      }
+};
+
+    function setLang(lang) {
+      if (!copy[lang]) lang = 'en';
+      document.body.classList.add('switching');
+      window.setTimeout(() => {
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        document.body.dataset.lang = lang;
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          const value = copy[lang][el.dataset.i18n];
+          if (value) el.textContent = value;
+        });
+        document.querySelectorAll('[data-set-lang]').forEach((btn) => {
+          btn.classList.toggle('active', btn.dataset.setLang === lang);
+        });
+        localStorage.setItem('opspilot_lang', lang);
+        document.body.classList.remove('switching');
+      }, 80);
+    }
+
+    document.querySelectorAll('[data-set-lang]').forEach((btn) => {
+      btn.addEventListener('click', () => setLang(btn.dataset.setLang));
+    });
+
+    const savedLang = localStorage.getItem('opspilot_lang');
+    setLang(savedLang || 'en');
+  </script>
+</body>
+</html>
